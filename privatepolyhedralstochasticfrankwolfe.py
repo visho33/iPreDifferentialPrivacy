@@ -43,7 +43,7 @@ class PolySFW:
         self.x[1] = (1-self.eta)*self.x[0]
         self.x[1] += self.eta*self.V[int(self.v[0])]
         for t in range(1, self.n//2):
-            print(f"el error en la iteración {t} con {self.x[t]} es {self.f.set_f(self.x[t], self.S_Y, self.S_Z)}")
+            #print(f"el error en la iteración {t} con {self.x[t]} es {self.f.set_f(self.x[t], self.S_Y, self.S_Z)}")
             self.s[t] = max(((1-self.eta)**t)*((2*self.f.L0*self.M)/self.n), 2*self.eta*(self.f.L1*self.M**2 + self.f.L0*self.M))
             grad_var = self.f.grad(self.x[t], self.S_hat_Y[t-1], self.S_hat_Z[t-1]) - self.f.grad(self.x[t-1], self.S_hat_Y[t-1], self.S_hat_Z[t-1])
             self.d[t] = (1-self.eta)*(self.d[t-1] + grad_var) + self.eta*self.f.grad(self.x[t], self.S_hat_Y[t-1], self.S_hat_Z[t-1])

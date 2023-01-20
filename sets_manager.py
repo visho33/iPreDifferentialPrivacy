@@ -1,6 +1,7 @@
-from numpy import array, zeros
+from numpy import array, zeros, dot
 from random import sample
-from numpy.random import choice
+from numpy.random import choice, rand
+from math import exp
 
 def get_l1_ball(dim, radius):
     #get the vertices of l1 ball of a given radius
@@ -27,3 +28,28 @@ def partition(Z, Y, size):
 def get_sample(Z, Y, size):
     selected = choice(Z.shape[0], size, replace=False)
     return Z[selected], Y[selected]
+
+def sigmoid(z):
+    return 1/(1+exp(-z))
+
+def generate_data(x_star, size, max_cordinate, EPS):
+    #create a dataset of given size using x_star, the probability of being incorrect class is EPS
+    dim = len(x_star)
+    
+    Z = zeros((size, dim - 1))
+    Y = zeros(size)
+    largo = 0
+    
+    while largo < size:
+        z = max_cordinate*rand(dim - 1) - max_cordinate
+        pred = sigmoid(dot(x_star[1:], z) + x_star[0])
+        if pred < EPS:
+            Z[largo] = z
+            Y[largo] = 0
+            largo += 1
+        if pred > 1 - EPS:
+            Z[largo] = z
+            Y[largo] = 1
+            largo += 1
+    
+    return array(Y), array(Z)
