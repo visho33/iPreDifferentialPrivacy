@@ -53,7 +53,7 @@ class PolySFW:
         self.x_priv = self.x[self.n//2]
         return
 
-    def argmin(self, d, beta):
+    def argmin(self, d, beta): #hacerlo más eficiente para l1
         mini = dot(self.V[0], d) + laplace(beta)
         where = 0
         for i in range(1, len(self.V)):

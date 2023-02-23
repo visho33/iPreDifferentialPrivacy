@@ -53,3 +53,11 @@ def generate_data(x_star, size, max_cordinate, EPS):
             largo += 1
     
     return array(Y), array(Z)
+
+
+def sparse(size, x):
+    newx = [0 for _ in range(size)]
+    selected = choice([i for i in range(size)], len(x), replace=False)
+    for i in range(len(x)):
+        newx[selected[i]] = x[i]
+    return newx

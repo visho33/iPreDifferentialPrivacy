@@ -15,6 +15,9 @@ class LossFunction: #Now is implemented logistic loss (it can be changed)
         # y is the real class (0 or 1)
         # z is the data (notice that dim(z) = dim(x) - 1)
         y_pred = self.sigmoid(dot(x[1:], z)+x[0])
+        #print(y_pred)
+        if y_pred == 1:
+            return -1*(y*log(y_pred))
         res = -1*(y*log(y_pred) + (1-y)*log(1-y_pred))
         return res
 
